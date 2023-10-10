@@ -5,10 +5,10 @@ export class Admin {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ default: 'admin@gmail.com' })
   email: string;
 
-  @Column({ default: '6274320085:AAHldNy9i31uRxvf6WhKp0tz6eYjlXp-tfA' })
+  @Column({ default: '6376084318:AAE26LB6kpGXlthXBOVA092jexMWFl7E-wA' })
   apikey: string;
 
   constructor(details: Partial<Admin>) {
