@@ -22,7 +22,7 @@ export default function UserList() {
   // fetch all users
   const getData = async () => {
     await axios
-      .get("http://localhost:8080/users")
+      .get("https://telegram-bot-backend-0zis.onrender.com/users")
       .then((response) => {
         setData(response.data);
       })
@@ -39,7 +39,10 @@ export default function UserList() {
         status: status,
       };
       axios
-        .put(`http://localhost:8080/users/${id}`, jsonData)
+        .put(
+          `https://telegram-bot-backend-0zis.onrender.com/users/${id}`,
+          jsonData
+        )
         .then((response) => {
           AlertObj.showAlert("Success", response.data, "green");
           setData(
@@ -63,7 +66,7 @@ export default function UserList() {
   const handleDelete = (id) => {
     if (LogObj.cookies["email"]) {
       axios
-        .delete(`http://localhost:8080/users/${id}`)
+        .delete(`https://telegram-bot-backend-0zis.onrender.com/users/${id}`)
         .then((response) => {
           AlertObj.showAlert("Success", response.data, "green");
           setData(
@@ -79,57 +82,67 @@ export default function UserList() {
   };
   return (
     <>
-      <div className="h-screen p-[20px]">
+      <div className="h-screen p-[20px] ">
         <h2 className="text-center text-[2rem] font-bold m-3">
           User Management
         </h2>
-        <table className="table-fixed w-[100%] border border-slate-500 ">
-          <thead>
-            <tr>
-              <th className=" border border-slate-500 ">Chat ID</th>
-              <th className=" border border-slate-500 ">City</th>
-              <th className=" border border-slate-500 ">Status</th>
-              <th className=" border border-slate-500 ">Management</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Loop to show all users  */}
-            {data.map((user, key) => {
-              return (
-                <tr key={key}>
-                  <td className=" border border-slate-500 ">{user.chat_id}</td>
-                  <td className=" border border-slate-500 ">{user.city}</td>
-                  <td className=" border border-slate-500 ">{user.status}</td>
-                  <td className=" border border-slate-500 ">
-                    {user.status === "block" ? (
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full border border-slate-500 overflow-scroll">
+            <thead>
+              <tr>
+                <th className=" border border-slate-500 ">Chat ID</th>
+                <th className=" border border-slate-500 ">City</th>
+                <th className=" border border-slate-500 ">Status</th>
+                <th className=" border border-slate-500 ">Management</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Loop to show all users  */}
+              {data.map((user, key) => {
+                return (
+                  <tr key={key}>
+                    <td className=" p-[10px] border border-slate-500 ">
+                      {user.chat_id}
+                    </td>
+                    <td className=" p-[10px] border border-slate-500 ">
+                      {user.city}
+                    </td>
+                    <td className=" p-[10px] border border-slate-500 ">
+                      {user.status}
+                    </td>
+                    <td className=" p-[10px] border border-slate-500 ">
+                      {user.status === "block" ? (
+                        <button
+                          onClick={() =>
+                            handleBlock(user.id, user.city, "subscribe")
+                          }
+                          className="m-[10px] p-[6px] w-[75px] rounded-[12px] border border-white bg-red-400 text-white hover:bg-white hover:text-red-400 hover:border-red-400"
+                        >
+                          UnBlock
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            handleBlock(user.id, user.city, "block")
+                          }
+                          className="m-[10px] p-[6px] w-[68px] rounded-[12px] border border-white bg-red-400 text-white hover:bg-white hover:text-red-400 hover:border-red-400"
+                        >
+                          Block
+                        </button>
+                      )}
                       <button
-                        onClick={() =>
-                          handleBlock(user.id, user.city, "subscribe")
-                        }
-                        className="m-[10px] p-[6px] w-[75px] rounded-[12px] border border-white bg-red-400 text-white hover:bg-white hover:text-red-400 hover:border-red-400"
-                      >
-                        UnBlock
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleBlock(user.id, user.city, "block")}
+                        onClick={() => handleDelete(user.id)}
                         className="m-[10px] p-[6px] w-[68px] rounded-[12px] border border-white bg-red-400 text-white hover:bg-white hover:text-red-400 hover:border-red-400"
                       >
-                        Block
+                        Delete
                       </button>
-                    )}
-                    <button
-                      onClick={() => handleDelete(user.id)}
-                      className="m-[10px] p-[6px] w-[68px] rounded-[12px] border border-white bg-red-400 text-white hover:bg-white hover:text-red-400 hover:border-red-400"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

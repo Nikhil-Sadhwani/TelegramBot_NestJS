@@ -8,7 +8,7 @@ export class User {
   @Column()
   chat_id: string;
 
-  @Column()
+  @Column({ default: null })
   city: string;
 
   @Column({ default: 'subscribe' })

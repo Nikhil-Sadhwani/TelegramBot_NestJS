@@ -25,7 +25,7 @@ export default function ApiChange() {
   // fetching Existing API from database
   const getApi = async () => {
     await axios
-      .get("http://localhost:8080/admin/1")
+      .get("https://telegram-bot-backend-0zis.onrender.com/admin/1")
       .then((response) => {
         setCurrentApi(response.data.apikey);
       })
@@ -40,7 +40,7 @@ export default function ApiChange() {
         apikey: newApi,
       };
       axios
-        .put("http://localhost:8080/admin/1", jsonData)
+        .put("https://telegram-bot-backend-0zis.onrender.com/admin/1", jsonData)
         .then((response) => {
           AlertObj.showAlert("Success", response.data, "green");
           setCurrentApi(newApi);
@@ -69,10 +69,10 @@ export default function ApiChange() {
       {/* Input box POP-UP  */}
       <div
         className={`${showInput ? "" : "hidden"} absolute
-         bg-black bg-opacity-[0.8] flex flex-col justify-center items-center h-screen w-screen`}
+         sm:bg-black sm:bg-opacity-[0.8] flex flex-col justify-center items-center h-screen w-screen`}
       >
         <div
-          className={`flex flex-col justify-center items-center w-[260px] h-[200px] rounded-lg bg-white z-10`}
+          className={`flex flex-col justify-center items-center w-[260px] h-[200px] rounded-lg bg-[#e9e9e9] sm:bg-white z-10`}
         >
           <p
             className="text-right w-[100%] pr-2 cursor-pointer"
@@ -100,12 +100,14 @@ export default function ApiChange() {
 
       {/* Front page where the current API shows */}
       <div
-        className={`flex flex-col justify-center items-center h-screen rounded-lg bg-white`}
+        // className={`flex flex-col justify-center items-center h-screen w-screen rounded-lg bg-white`}
+        className={` flex flex-col justify-center items-center h-screen w-screen rounded-lg bg-white`}
       >
-        <h2 className="text-[5rem] m-[10px] font-bold absolute top-1">
+        {/* <h2 className="text-[5rem] m-[10px] font-bold absolute top-1"> */}
+        <h2 className="text-[2rem] sm:text-[3rem] md:text-[4rem] m-[10px] font-bold absolute top-1">
           Current API
         </h2>
-        <p className="text-[2.5rem]  m-[35px]">
+        <p className=" text-sm sm:text-[1.5rem] md:text-[2rem]  m-[35px]">
           {currentApi ? currentApi : "No Api Set"}
         </p>
         <button
