@@ -14,14 +14,9 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 // States
 import LogState from "./context/logManage/LogState.js";
 import AlertState from "./context/alertManage/AlertState";
-import { useEffect } from "react";
 
 function App() {
   const client_Id = process.env.REACT_APP_CLIENT_ID;
-
-  useEffect(() => {
-    console.log(process.env);
-  });
   return (
     <>
       <AlertState>
