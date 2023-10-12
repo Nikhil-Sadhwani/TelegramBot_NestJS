@@ -8,7 +8,7 @@ export class Admin {
   @Column({ default: 'admin@gmail.com' })
   email: string;
 
-  @Column({ default: '6376084318:AAE26LB6kpGXlthXBOVA092jexMWFl7E-wA' })
+  @Column({ default: process.env.BOT_TOKEN })
   apikey: string;
 
   constructor(details: Partial<Admin>) {

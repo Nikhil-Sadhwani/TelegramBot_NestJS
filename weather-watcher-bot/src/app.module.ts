@@ -12,9 +12,10 @@ import { AdminModule } from './admin/admin.module';
 import { AdminService } from './admin/admin.service';
 import { adminProviders } from './admin/admin.providers';
 import { AdminController } from './admin/admin.controller';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TelegramModule, DatabaseModule, UsersModule, AdminModule],
+  imports: [ConfigModule.forRoot(),TelegramModule, DatabaseModule, UsersModule, AdminModule],
   controllers: [AppController, UsersController, AdminController],
   providers: [
     AppService,
