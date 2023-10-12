@@ -14,13 +14,19 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 // States
 import LogState from "./context/logManage/LogState.js";
 import AlertState from "./context/alertManage/AlertState";
+import { useEffect } from "react";
 
 function App() {
+  const client_Id = process.env.REACT_APP_CLIENT_ID;
+
+  useEffect(() => {
+    console.log(process.env);
+  });
   return (
     <>
       <AlertState>
         <LogState>
-          <GoogleOAuthProvider clientId="786530052195-h89n8ah2hfv9qvrc6h2eeqm2hc2hpssr.apps.googleusercontent.com">
+          <GoogleOAuthProvider clientId={client_Id}>
             <BrowserRouter>
               <Alert />
               <Routes>
